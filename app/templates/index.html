@@ -1,0 +1,544 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ResumeLens | Recruitment Workspace</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+      <div class="brand-icon">R</div>
+      <div class="brand-text">
+        <strong>ResumeLens</strong>
+        <small>Recruitment Intelligence</small>
+      </div>
+      <button class="collapse-btn" id="sidebarToggle">☰</button>
+    </div>
+
+    <div class="nav-label">WORKSPACE</div>
+
+    <nav class="navigation">
+      <button class="nav-item active" data-page="dashboard">
+        <span class="nav-icon">▦</span>
+        <span class="nav-text">Overview</span>
+      </button>
+
+      <button class="nav-item" data-page="screening">
+        <span class="nav-icon">⌕</span>
+        <span class="nav-text">Resume Screening</span>
+      </button>
+
+      <button class="nav-item" data-page="candidates">
+        <span class="nav-icon">♙</span>
+        <span class="nav-text">Candidates</span>
+      </button>
+
+      <button class="nav-item" data-page="compare">
+        <span class="nav-icon">⇄</span>
+        <span class="nav-text">Compare Candidates</span>
+      </button>
+
+      <button class="nav-item" data-page="analytics">
+        <span class="nav-icon">▥</span>
+        <span class="nav-text">Analytics</span>
+      </button>
+    </nav>
+
+    <div class="nav-label account-label">ACCOUNT</div>
+
+    <nav class="navigation">
+      <button class="nav-item" data-page="profile">
+        <span class="nav-icon">◎</span>
+        <span class="nav-text">Recruiter Profile</span>
+      </button>
+
+      <button class="nav-item" data-page="settings">
+        <span class="nav-icon">⚙</span>
+        <span class="nav-text">Settings</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="recruiter-mini">
+        <div class="avatar" id="sidebarAvatar">R</div>
+        <div class="recruiter-info">
+          <strong id="sidebarRecruiterName">Recruiter</strong>
+          <small id="sidebarRecruiterRole">Talent Acquisition</small>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <header class="topbar">
+      <div>
+        <div class="breadcrumb">Workspace / <span id="breadcrumbText">Overview</span></div>
+        <h2 id="topbarTitle">Overview</h2>
+      </div>
+
+      <div class="topbar-right">
+        <div class="topbar-date" id="currentDate"></div>
+        <div class="topbar-avatar" id="topbarAvatar">R</div>
+      </div>
+    </header>
+
+    <!-- DASHBOARD -->
+    <section class="page active" id="page-dashboard">
+
+      <div class="welcome-section">
+        <div>
+          <div class="eyebrow">RECRUITMENT WORKSPACE</div>
+          <h1>Good to see you, <span id="welcomeName">Recruiter</span> 👋</h1>
+          <p>Manage your candidates and discover talent with AI-powered insights.</p>
+        </div>
+
+        <button class="primary-btn" data-go="screening">
+          + Screen a resume
+        </button>
+      </div>
+
+      <div class="stats-grid">
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <span>Total Candidates</span>
+            <span class="stat-icon purple">♙</span>
+          </div>
+          <h2 id="totalCandidates">0</h2>
+          <p>Saved screening records</p>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <span>Average Match Score</span>
+            <span class="stat-icon blue">◈</span>
+          </div>
+          <h2 id="averageScore">--</h2>
+          <p>Across screened candidates</p>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <span>Shortlisted</span>
+            <span class="stat-icon green">✓</span>
+          </div>
+          <h2 id="shortlistedCount">0</h2>
+          <p>Potential candidates</p>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <span>Screenings</span>
+            <span class="stat-icon orange">✧</span>
+          </div>
+          <h2 id="screeningCount">0</h2>
+          <p>Total analyses performed</p>
+        </div>
+
+      </div>
+
+      <div class="dashboard-grid">
+
+        <div class="content-card recent-card">
+          <div class="card-heading">
+            <div>
+              <h3>Recent candidates</h3>
+              <p>Your latest resume screening activity</p>
+            </div>
+            <button class="text-btn" data-go="candidates">View all →</button>
+          </div>
+
+          <div id="recentCandidates" class="candidate-list">
+            <div class="empty-state">
+              <div class="empty-icon">♙</div>
+              <h3>No candidates yet</h3>
+              <p>Your screened resumes will appear here.</p>
+              <button class="secondary-btn" data-go="screening">Screen your first resume</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-card quick-card">
+          <div class="card-heading">
+            <div>
+              <h3>Quick actions</h3>
+              <p>Jump into your workspace</p>
+            </div>
+          </div>
+
+          <button class="quick-action" data-go="screening">
+            <span class="quick-icon purple">✧</span>
+            <span>
+              <strong>Screen a resume</strong>
+              <small>Analyze a candidate against a role</small>
+            </span>
+            <span class="quick-arrow">→</span>
+          </button>
+
+          <button class="quick-action" data-go="candidates">
+            <span class="quick-icon blue">♙</span>
+            <span>
+              <strong>Candidate database</strong>
+              <small>Explore previous screenings</small>
+            </span>
+            <span class="quick-arrow">→</span>
+          </button>
+
+          <button class="quick-action" data-go="compare">
+            <span class="quick-icon green">⇄</span>
+            <span>
+              <strong>Compare candidates</strong>
+              <small>Evaluate candidates side by side</small>
+            </span>
+            <span class="quick-arrow">→</span>
+          </button>
+
+          <button class="quick-action" data-go="profile">
+            <span class="quick-icon orange">◎</span>
+            <span>
+              <strong>Recruiter profile</strong>
+              <small>Personalize your workspace</small>
+            </span>
+            <span class="quick-arrow">→</span>
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- RESUME SCREENING -->
+    <section class="page" id="page-screening">
+
+      <div class="page-intro">
+        <div class="eyebrow">AI-POWERED EVALUATION</div>
+        <h1>Resume Screening</h1>
+        <p>Evaluate a candidate's skills and experience against a job description.</p>
+      </div>
+
+      <div class="content-card screening-card">
+
+        <form id="screenForm">
+
+          <div class="screening-grid">
+
+            <div class="field-block">
+              <label>Candidate Resume</label>
+
+              <div class="upload-box" id="dropArea">
+                <div class="upload-icon">↑</div>
+                <h3 id="fileName">Drop your PDF resume here</h3>
+                <p>or select a file from your computer</p>
+                <small>PDF FILE · MAX 5 MB</small>
+
+                <input id="resume" name="resume" type="file" accept=".pdf,application/pdf" required>
+
+                <button class="secondary-btn" type="button" id="browseBtn">
+                  Browse files
+                </button>
+              </div>
+            </div>
+
+            <div class="field-block">
+              <label for="job_description">Job Description</label>
+
+              <textarea
+                id="job_description"
+                name="job_description"
+                placeholder="Paste the job description here...
+
+Include:
+• Role responsibilities
+• Required technical skills
+• Experience requirements
+• Qualifications"
+                required
+              ></textarea>
+            </div>
+
+          </div>
+
+          <div class="screening-footer">
+            <p>✦ AI-assisted screening · Human judgment remains essential</p>
+
+            <button class="primary-btn" id="analyzeBtn" type="submit">
+              <span>Analyze candidate</span>
+              <span>→</span>
+            </button>
+          </div>
+
+        </form>
+
+      </div>
+
+      <div id="status" class="status hidden"></div>
+      <div id="results" class="results hidden"></div>
+
+    </section>
+
+    <!-- CANDIDATES -->
+    <section class="page" id="page-candidates">
+
+      <div class="page-intro">
+        <div class="eyebrow">TALENT DATABASE</div>
+        <h1>Candidate Database</h1>
+        <p>Access your previously screened candidates and their AI reports.</p>
+      </div>
+
+      <div class="content-card">
+
+        <div class="candidate-toolbar">
+          <input id="candidateSearch" type="search" placeholder="Search candidates...">
+
+          <select id="candidateFilter">
+            <option value="all">All candidates</option>
+            <option value="shortlisted">Shortlisted</option>
+            <option value="high">Strong matches</option>
+            <option value="low">Needs review</option>
+          </select>
+        </div>
+
+        <div id="candidateDatabase">
+          <div class="empty-state">
+            <div class="empty-icon">♙</div>
+            <h3>Your candidate database is empty</h3>
+            <p>Screen a resume to start building your candidate database.</p>
+            <button class="primary-btn" data-go="screening">Screen a resume</button>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- COMPARE -->
+    <section class="page" id="page-compare">
+
+      <div class="page-intro">
+        <div class="eyebrow">TALENT COMPARISON</div>
+        <h1>Compare Candidates</h1>
+        <p>Compare previously screened candidates to understand their strengths and skill differences.</p>
+      </div>
+
+      <div class="content-card">
+
+        <div class="card-heading">
+          <div>
+            <h3>Candidate selection</h3>
+            <p>Select candidates from your saved screening history.</p>
+          </div>
+        </div>
+
+        <div class="compare-select-grid">
+          <div class="field-block">
+            <label for="compareCandidate1">Candidate 1</label>
+            <select id="compareCandidate1">
+              <option value="">Select candidate</option>
+            </select>
+          </div>
+
+          <div class="field-block">
+            <label for="compareCandidate2">Candidate 2</label>
+            <select id="compareCandidate2">
+              <option value="">Select candidate</option>
+            </select>
+          </div>
+        </div>
+
+        <button id="compareBtn" class="primary-btn" type="button">
+          Compare candidates →
+        </button>
+
+        <div id="comparisonResults"></div>
+
+      </div>
+
+    </section>
+
+    <!-- ANALYTICS -->
+    <section class="page" id="page-analytics">
+
+      <div class="page-intro">
+        <div class="eyebrow">RECRUITMENT INSIGHTS</div>
+        <h1>Analytics</h1>
+        <p>Understand your screening activity and candidate trends.</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-top"><span>Screened</span></div>
+          <h2 id="analyticsTotal">0</h2>
+          <p>Candidate records</p>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top"><span>Average Score</span></div>
+          <h2 id="analyticsAverage">--</h2>
+          <p>Overall candidate match</p>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top"><span>Strong Matches</span></div>
+          <h2 id="analyticsStrong">0</h2>
+          <p>Scores of 75 or above</p>
+        </div>
+      </div>
+
+      <div class="content-card analytics-card">
+        <div class="card-heading">
+          <div>
+            <h3>Screening activity</h3>
+            <p>Your saved candidate results</p>
+          </div>
+        </div>
+
+        <div id="analyticsContent">
+          <div class="empty-state">
+            <h3>Analytics will appear here</h3>
+            <p>Screen resumes to generate recruitment insights.</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- RECRUITER PROFILE -->
+    <section class="page" id="page-profile">
+
+      <div class="page-intro">
+        <div class="eyebrow">PERSONAL WORKSPACE</div>
+        <h1>Recruiter Profile</h1>
+        <p>Manage your professional details and personalize ResumeLens.</p>
+      </div>
+
+      <div class="content-card profile-card">
+
+        <div class="profile-heading">
+          <div class="profile-avatar" id="profileAvatar">R</div>
+          <div>
+            <h3>Your recruiter information</h3>
+            <p>Your profile is stored locally in this browser.</p>
+          </div>
+        </div>
+
+        <form id="profileForm">
+
+          <div class="profile-grid">
+
+            <div class="field-block">
+              <label for="recruiterName">Full name</label>
+              <input id="recruiterName" name="recruiterName" placeholder="Enter your name">
+            </div>
+
+            <div class="field-block">
+              <label for="recruiterEmail">Email</label>
+              <input id="recruiterEmail" name="recruiterEmail" type="email" placeholder="name@company.com">
+            </div>
+
+            <div class="field-block">
+              <label for="recruiterRole">Job title</label>
+              <input id="recruiterRole" name="recruiterRole" placeholder="e.g. Talent Acquisition Specialist">
+            </div>
+
+            <div class="field-block">
+              <label for="recruiterCompany">Company</label>
+              <input id="recruiterCompany" name="recruiterCompany" placeholder="Company name">
+            </div>
+
+            <div class="field-block">
+              <label for="recruiterDepartment">Department</label>
+              <input id="recruiterDepartment" name="recruiterDepartment" placeholder="e.g. Human Resources">
+            </div>
+
+            <div class="field-block">
+              <label for="recruiterExperience">Years of experience</label>
+              <input id="recruiterExperience" name="recruiterExperience" type="number" min="0" placeholder="Years">
+            </div>
+
+            <div class="field-block">
+              <label for="recruiterSpecialization">Specialization</label>
+              <select id="recruiterSpecialization" name="recruiterSpecialization">
+                <option value="">Select specialization</option>
+                <option>Technology & IT</option>
+                <option>Software Engineering</option>
+                <option>Data & AI</option>
+                <option>Finance</option>
+                <option>Marketing</option>
+                <option>Healthcare</option>
+                <option>General Recruitment</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+          </div>
+
+          <button class="primary-btn" type="submit">Save profile</button>
+
+        </form>
+
+      </div>
+
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="page" id="page-settings">
+
+      <div class="page-intro">
+        <div class="eyebrow">WORKSPACE PREFERENCES</div>
+        <h1>Settings</h1>
+        <p>Manage your ResumeLens workspace.</p>
+      </div>
+
+      <div class="content-card settings-card">
+
+        <div class="setting-row">
+          <div>
+            <h3>Candidate data</h3>
+            <p>Candidate records are currently saved in this browser.</p>
+          </div>
+          <span class="setting-tag">Local storage</span>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <h3>Recruiter profile</h3>
+            <p>Manage your information in the Recruiter Profile section.</p>
+          </div>
+          <button class="secondary-btn" data-go="profile">Open profile</button>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <h3>Clear candidate records</h3>
+            <p>Delete all locally stored candidate screening history.</p>
+          </div>
+          <button class="danger-btn" id="clearCandidatesBtn">Clear data</button>
+        </div>
+
+      </div>
+
+    </section>
+
+    <footer class="app-footer">
+      <span>ResumeLens</span>
+      <span>AI-assisted recruitment · Fair and responsible screening</span>
+    </footer>
+
+  </main>
+
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
