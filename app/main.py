@@ -97,10 +97,10 @@ async def screen_resume(
     client_ip = request.client.host if request.client else "unknown"
     check_rate_limit(client_ip)
 
-    if not os.getenv("OPENAI_API_KEY"):
+    if not os.getenv("GEMINI_API_KEY"):
         raise HTTPException(
             status_code=503,
-            detail="OPENAI_API_KEY is not configured. Add it to your .env file or deployment environment variables."
+            detail="GEMINI_API_KEY is not configured. Add it to your environment variables."
         )
 
     if not resume.filename or not resume.filename.lower().endswith(".pdf"):
